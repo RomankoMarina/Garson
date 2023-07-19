@@ -1,0 +1,18 @@
+  {% load static %}
+
+<head>
+	<meta charset="UTF-8">
+	<title>Правка meal</title>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+    {% block content %}
+	<meta charset="utf-8">
+        <h1>Правка meal</h1>
+        <form method="POST" class="post-form" enctype="multipart/form-data" autocomplete="off">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Сохранить</button>
+        </form>
+
+    {% endblock %}

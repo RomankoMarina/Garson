@@ -1,0 +1,50 @@
+<meta charset="utf-8">
+  <a class="btn btn-default" href="{% url 'hello' %}"><span class="glyphicon glyphicon-home"> На главную</span></a>
+
+  <h1>Список регионов</h1>
+
+  <table border=2>
+    <thead>
+     <tr>
+      <th data-type="string">Awis</th>
+      <th data-type="string">Название</th>
+      <th data-type="string">IP</th>
+      <th data-type="string">MAC</th>
+      <th data-type="string">Шлюз</th>
+      <th data-type="string">Свич</th>
+      <th data-type="string">Статус</th>
+      <th data-type="string">Процесс</th>
+      <th data-type="string">Старт</th>
+
+      <th>Редактировать</th>
+      <th>Обновить</th>
+     </tr>
+    </thead>
+
+       {% for region in regions %}
+         <tr>
+            <td>{{ region.name }}</td>
+            <td>{{ cam.title }}</td>
+            <td>{{ cam.ip }}</td>
+            <td>{{ cam.mac }}</td>
+            <td>{{ cam.gw }}</td>
+            <td>{{ cam.switch }}</td>
+            <td>{{ cam.status }}</td>
+            <td style="font-size: 120%; font-family: monospace; color: #cd66cc">{{ cam.process }}</td>
+            <td style="font-size: 120%; font-family: monospace; color: #cd66cc">{{ cam.start }}</td>
+	       </tr>
+       {% endfor %}
+
+  </table>
+  <form>
+    <input type="button" value="Добавить" onClick='location.href="../cam/add/"'>
+    <input type="button" value="Создать" onClick='location.href="../cam/new/"'>
+    <input type="button" value="Создать2" onClick='location.href="../cam/new/"'>
+  </form>
+
+      <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Сохранить</button>
+        </form>
+
+{{data}}

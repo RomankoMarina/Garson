@@ -1,0 +1,38 @@
+{% load static %}
+<meta charset="utf-8">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <a class="btn btn-default" href="{% url 'hello' %}"><span class="glyphicon glyphicon-home"> На главную</span></a>
+
+  <h1>Список meals</h1>
+
+  <table border=2>
+    <thead>
+     <tr>
+      <th data-type="string">Назва страви</th>
+      <th data-type="string">категорія</th>
+      <th data-type="string">опис</th>
+      <th data-type="string">місто</th>
+     </tr>
+    </thead>
+
+       {% for meal in meals %}
+         <tr>
+           <td>{{ meal.name }}</td>
+            <td>{{ meal.category.name }}</td>
+            <td>{{ meal.description }}</td>
+            <td>{{ meal.place.name }}</td>
+            <td><a class="btn btn-default" href="{% url 'meal_edit' nn=meal.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'meal_delete' nn=meal.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+         </tr>
+             {% endfor %}
+
+
+  </table>
+
+      <form method="POST" class="post-form" enctype="multipart/form-data" autocomplete="off">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Сохранить</button>
+        </form>
+
+{{data}}

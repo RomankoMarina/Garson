@@ -1,0 +1,49 @@
+ {% load static %}
+<meta charset="utf-8">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <a class="btn btn-default" href="{% url 'hello' %}"><span class="glyphicon glyphicon-home"> На главную</span></a>
+
+  <h1>Список place</h1>
+
+  <table border=2>
+    <thead>
+     <tr>
+      <th data-type="string">Назва закладу</th>
+      <th data-type="string">тип</th>
+      <th data-type="string">№ телефону</th>
+      <th data-type="string">email</th>
+      <th data-type="string">вулиця</th>
+      <th data-type="string">№ будинку</th>
+      <th data-type="string">Координати</th>
+      <th data-type="string">Лого</th>
+      <th data-type="string">Опис</th>
+
+     </tr>
+    </thead>
+
+       {% for place in places %}
+         <tr>
+           <td>{{ place.name }}</td>
+            <td>{{ place.type }}</td>
+            <td>{{ place.phone_number }}</td>
+            <td>{{ place.email }}</td>
+            <td>{{ place.street.name}}</td>
+            <td>{{ place.building }}</td>
+            <td>{{ place.coordinate }}</td>
+             <td>{%if place.logo%}<img width="50" height="50" src ={{ place.logo.url }}> {%endif%}</td>
+             <td>{{ place.description }}</td>
+
+            <td><a class="btn btn-default" href="{% url 'place_edit' nn=place.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'place_delete' nn=place.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+       {% endfor %}
+         </tr>
+  </table>
+
+
+      <form method="POST" class="post-form" enctype="multipart/form-data" autocomplete="off">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Сохранить</button>
+        </form>
+
+{{data}}
